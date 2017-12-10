@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_table_public.tnp.fx" author="mh" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tnp" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE public.tnp (
+            VKEY varchar(2),
+            TNP	varchar(1),
+            FULLNAME varchar(50),
+            SHORTNAME varchar(6),
+            CONSTRAINT tnp_vkey_pk PRIMARY KEY(vkey),
+            CONSTRAINT uer_uk UNIQUE(tnp)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="public.insert.tnp" author="mh" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tnp" schemaName="public"/>
+        </preConditions>
+        <sql>
+            INSERT INTO public.tnp  VALUES('01',	'1',	'ГОРОД',	'Г');
+            INSERT INTO public.tnp  VALUES('02',	'2',	'ПОСЕЛОК',	'П');
+            INSERT INTO public.tnp  VALUES('03',	'3',	'СЕЛО',	'С');
+            INSERT INTO public.tnp  VALUES('04',	'4',	'ПОСЕЛОК ГОРОДСКОГО ТИПА',	'ПГТ');
+            INSERT INTO public.tnp  VALUES('05',	'5',	'СТАНИЦА',	'СТ-ЦА');
+            INSERT INTO public.tnp  VALUES('06',	'6',	'АУЛ',	'АУЛ');
+            INSERT INTO public.tnp  VALUES('07',	'7',	'РАБОЧИЙ ПОСЕЛОК',	'РП');
+            INSERT INTO public.tnp  VALUES('08',	'0',    'Тест00',	    'Тест00');
+            INSERT INTO public.tnp  VALUES('09',	'',    'Тест',	    'Тест');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
