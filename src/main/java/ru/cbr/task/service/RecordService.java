@@ -41,4 +41,5 @@ public class RecordService {
         recordRepository.delete(vkey);
     }
 
+    public Record searchByVkey(String vkey) {return recordRepository.findOne(vkey);}
 }

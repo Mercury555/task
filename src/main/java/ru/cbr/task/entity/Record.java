@@ -1,5 +1,9 @@
 package ru.cbr.task.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import ru.cbr.task.config.DateDeserializer;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,15 +35,19 @@ public class Record {
     private String regn;
     private String okpo;
     @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date dt_izm;
     private String cks;
     private String ksnp;
     @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date date_in;
     @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date date_ch;
     private String vkeydel;
     @Temporal(TemporalType.DATE)
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date dt_izmr;
 
     public Record() {
@@ -270,7 +278,6 @@ public class Record {
     public static List<String> getNamesOfRow() {
         return namesOfRow;
     }
-
 
 
     public String getRkc() {

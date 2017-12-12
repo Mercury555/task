@@ -1,5 +1,6 @@
 package ru.cbr.task.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.cbr.task.entity.Record;
@@ -8,7 +9,9 @@ import ru.cbr.task.service.RecordService;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/records")
+@Api(description = "Work with records")
 public class RecordController {
     private final RecordService recordService;
 
@@ -22,7 +25,7 @@ public class RecordController {
         return recordService.findAllByPzn(pzn);
     }
 
-    @RequestMapping(path = "/search", params = {"rkc"}, method = RequestMethod.GET)
+    @RequestMapping(path = "/searchAllByRkc", params = {"rkc"}, method = RequestMethod.GET)
     public List<Record> searchAllByRkc(@RequestParam String rkc) {
         return recordService.searchAllByRkc(rkc);
     }
@@ -30,6 +33,11 @@ public class RecordController {
     @RequestMapping(path = "/searchAllByRgn", params = {"rgn"}, method = RequestMethod.GET)
     public List<Record> searchAllByRgn(@RequestParam String rgn) {
         return recordService.searchAllByRgn(rgn);
+    }
+
+    @RequestMapping(path = "/searchByVkey", params = {"vkey"}, method = RequestMethod.GET)
+    public Record searchByVkey(@RequestParam String vkey) {
+        return recordService.searchByVkey(vkey);
     }
 
     @RequestMapping(method = RequestMethod.GET)
